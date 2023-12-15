@@ -126,7 +126,7 @@ function readCardCSV(target_id) {
     console.log(header);
     console.log(data);
 
-    // 例: 結果を表示
+    // 例: 結果表示
     //outputElement.textContent = JSON.stringify(rows, null, 2);
 
     // 観光地情報を表示
