@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- 文書の基本設定 -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- ページのタイトル -->
+  <title>回る文字列</title>
+  <!-- スタイルの定義 -->
+  <style>
+    @keyframes rotateAndFadeOut {
+      /* 回転とフェードアウトのアニメーション設定 */
+      0% {
+        transform: rotate(0deg);
+        opacity: 1;
+      }
+      100% {
+        transform: rotate(360deg);
+        opacity: 0;
+      }
+    }
+
+    /* 回転テキストのスタイル設定 */
+    .rotating-text {
+      font-size: 24px;
+      color: #333;
+      white-space: nowrap; /* 改行を防ぐ */
+      overflow: hidden; /* 内容がはみ出した部分を隠す */
+    }
+
+    /* 各文字に適用するアニメーション */
+    .rotating-span {
+      display: inline-block;
+      animation: rotateAndFadeOut 2s linear forwards;
+    }
+  </style>
+</head>
+<body>
+  <!-- JavaScriptの実行 -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      // ページが読み込まれた後に実行されるコード
+
+      // テキスト要素を取得
+      const rotatingText = document.querySelector('.rotating-text');
+
+      // テキストの内容を取得
+      const textContent = rotatingText.textContent;
+
+      // テキストを一文字ずつ<span>で囲んで回転アニメーションを適用
+      const wrappedText = textContent
+        .split('')
+        .map(letter => {
+          // ランダムな位置を生成
+          const posX = Math.random() * window.innerWidth;
+          const posY = Math.random() * window.innerHeight;
+          return `<span class="rotating-span" style="position: absolute; top: ${posY}px; left: ${posX}px;">${letter}</span>`;
+        })
+        .join('');
+
+      // HTMLにセット
+      rotatingText.innerHTML = wrappedText;
+    });
+  </script>
+
+  <!-- 回転テキストの表示 -->
+  <div class="rotating-text">回転しながら消えていくテキスト</div>
+</body>
+</html>

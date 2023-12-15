@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="ja"> <!-- 言語を日本語に設定 -->
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>四方八方文字列</title>
+  <style>
+    body {
+      margin: 0;
+      overflow: hidden;
+      background-color: white;
+      color: black;
+      font-family: 'Arial', sans-serif;
+    }
+
+    .flying-text {
+      position: absolute;
+      font-size: 2em;
+      user-select: none;
+      pointer-events: none;
+    }
+  </style>
+</head>
+<body>
+
+<script>
+  const textToFly = "Hello, World!";
+  const numParticles = 30;
+
+  function createFlyingText() {
+    const flyingText = document.createElement('div');
+    flyingText.className = 'flying-text';
+    flyingText.innerText = textToFly;
+    document.body.appendChild(flyingText);
+
+    // 初期位置をランダムに設定
+    const initialX = Math.random() * window.innerWidth;
+    const initialY = Math.random() * window.innerHeight;
+    flyingText.style.transform = `translate(${initialX}px, ${initialY}px)`;
+
+    // 速度を上げ、最低速度を20に保証
+    const speedX = ((Math.random() - 0.5) * 2 + 0.1) * 30; // X方向の速度を増加
+    const speedY = ((Math.random() - 0.5) * 2 + 0.1) * 30; // Y方向の速度を増加
+
+    // アニメーションの更新
+    function updatePosition() {
+      const rect = flyingText.getBoundingClientRect();
+
+      // 画面外に出たら要素を削除
+      if (
+        rect.left > window.innerWidth ||
+        rect.right < 0 ||
+        rect.top > window.innerHeight ||
+        rect.bottom < 0
+      ) {
+        document.body.removeChild(flyingText);
+      } else {
+        // 画面内にある場合は位置を更新
+        flyingText.style.transform = `translate(${rect.left + speedX}px, ${rect.top + speedY}px)`;
+        requestAnimationFrame(updatePosition);
+      }
+    }
+
+    // アニメーションの開始
+    updatePosition();
+  }
+
+  // 指定数の飛んでくる文字を生成
+  for (let i = 0; i < numParticles; i++) {
+    createFlyingText();
+  }
+</script>
+
+</body>
+</html>

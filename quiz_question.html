@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>クイズ</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+        }
+
+        header {
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 1em;
+        }
+
+        section {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+
+        .image-container {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+
+        img {
+            width: calc(25% - 20px);
+            height: auto;
+            border-radius: 8px;
+            margin: 10px;
+        }
+
+        button {
+            background-color: #4caf50;
+            color: #fff;
+            padding: 10px 20px;
+            font-size: 16px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        .karuta-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+        }
+
+        .karuta-card {
+            max-width: 100%;
+            width: 350px;
+            height: 200px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .karuta-card img {
+            max-width: 100%;
+            max-height: 100%;
+            border-radius: 8px;
+            margin-right: 10px;
+        }
+
+        .karuta-card p {
+            margin: 0;
+            font-size: 18px;
+            color: #333;
+        }
+
+        .image-container {
+            display: flex;
+            flex-direction: row;
+        }
+
+        .image-container img {
+            width: 200px;
+            /* 画像の幅を調整するための適切なサイズに調整 */
+            height: auto;
+            /* アスペクト比を維持しつつ、高さを自動調整 */
+            margin: 5px;
+            /* 画像間の余白 */
+        }
+    </style>
+</head>
+
+<body onload="readQCSV(0)">
+    <script
+        src="https://cdn.jsdelivr.net/npm/microsoft-cognitiveservices-speech-sdk@latest/distrib/browser/microsoft.cognitiveservices.speech.sdk.bundle-min.js">
+        </script>
+
+    <section id="quiz">
+        <input type="file" id="fileInput" accept=".csv">
+        <input type="file" id="fileInput_Card" accept=".csv">
+        <button onclick="readQCSV(0),synthesizeSpeech()">問題表示</button>
+
+        <div class="karuta-container">
+            <div class="karuta-card">
+
+                <div id="output"></div>
+            </div>
+        </div>
+
+        <div id="image-container" class="image-container">
+
+        </div>
+    </section>
+    <script type="text/javascript" src="script.js"></script>
+    <script src="script.js">createTouristInfo(
+            containerId,
+            row[header.indexOf('文言')] || 'テキストなし',
+        );</script>
+</body>
+
+</html>

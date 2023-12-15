@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <!-- 文書の基本設定 -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- ページのタイトル -->
+    <title>降りてくる文字列</title>
+    <!-- スタイルの定義 -->
+    <style>
+        body {
+            /* 余白をなくし、オーバーフローを隠す */
+            margin: 0;
+            overflow: hidden;
+        }
+
+        /* 降ってくるテキストのスタイル設定 */
+        .falling-text {
+            position: absolute;
+            font-weight: bold;
+            pointer-events: none; /* マウスイベントを無効にする */
+        }
+    </style>
+</head>
+<body>
+
+<!-- JavaScriptの実行 -->
+<script>
+    // 降ってくるテキストの内容
+    const textToFall = "天穿つ市を見守る目銀河の塔";
+    const textLength = textToFall.length;
+    const fallingSpeed = 2; // 降下速度
+    const timeInterval = 100; // 文字ごとの表示間隔
+    const pageHeight = window.innerHeight; // ページの高さ
+    const pageWidth = window.innerWidth; // ページの幅
+    const fonts = ["Arial", "MS PGothic"]; // 使用するフォントのリスト
+    const minFontSize = 50; // 最小のフォントサイズ
+    const maxFontSize = 100; // 最大のフォントサイズ
+    const fallingTextContainer = document.body;
+
+    // ランダムなフォントを取得
+    function getRandomFont() {
+        return fonts[Math.floor(Math.random() * fonts.length)];
+    }
+
+    // ランダムなフォントサイズを取得
+    function getRandomFontSize() {
+        return Math.floor(Math.random() * (maxFontSize - minFontSize + 1) + minFontSize) + "px";
+    }
+
+    // 降ってくるテキストのアニメーションを開始
+    function startFallingTextAnimation() {
+        for (let i = 0; i < textLength; i++) {
+            // 文字ごとに一定の間隔で表示をスケジュール
+            setTimeout(() => {
+                createFallingText(i);
+            }, i * timeInterval);
+        }
+    }
+
+    // 以前の文字列のX座標を記憶するためのセット
+    const usedXCoordinates = new Set();
+
+    // 降ってくるテキストの要素を生成
+    function createFallingText(index) {
+        const letter = textToFall.charAt(index);
+        const span = document.createElement("span");
+        span.innerText = letter;
+        span.classList.add("falling-text");
+
+        let initialX;
+
+        // かぶりを避けるためのループ
+        do {
+            initialX = Math.random() * pageWidth;
+        } while (usedXCoordinates.has(initialX));
+
+        usedXCoordinates.add(initialX);
+
+        const initialY = -30; // 開始位置のY座標
+        span.style.position = "absolute";
+        span.style.left = initialX + "px";
+        span.style.top = initialY + "px";
+        span.style.fontFamily = getRandomFont();
+        span.style.fontSize = getRandomFontSize();
+
+        fallingTextContainer.appendChild(span);
+
+        animateFallingText(span, initialX, initialY);
+    }
+
+    // 降ってくるテキストのアニメーション
+    function animateFallingText(element, x, y) {
+        let currentY = y;
+
+        function move() {
+            currentY += fallingSpeed;
+            element.style.top = currentY + "px";
+
+            if (currentY < pageHeight) {
+                requestAnimationFrame(move);
+            } else {
+                // 画面下部まで到達したら要素を削除
+                element.remove();
+            }
+        }
+
+        move();
+    }
+
+    // ページの読み込み完了時にアニメーションを開始
+    window.onload = startFallingTextAnimation;
+</script>
+
+</body>
+</html>

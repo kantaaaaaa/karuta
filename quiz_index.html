@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>郡山観光かるたクイズ</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+        }
+
+        header {
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 1em;
+        }
+
+        section {
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            color: #333;
+        }
+
+        ol {
+            padding-left: 20px;
+        }
+
+        button {
+            background-color: #4caf50;
+            color: #fff;
+            padding: 10px 20px;
+            font-size: 16px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            text-align: center;
+            display: block;
+            margin: 0 auto;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>郡山観光かるたクイズ</h1>
+    </header>
+
+    <section id="how-to-play">
+        <h2>かるたの遊び方</h2>
+        <ol>
+            <li>読み札が表示されます。読み札の内容と合った絵札を選びましょう。</li>
+            <li>正解の絵札が表示されます。</li>
+            <li>「次の問題へ進む」ボタンを押すと次のセット(問題)へ移ります。</li>
+            <li>全部で5問ランダムに表示されます。</li>
+        </ol>
+    </section>
+
+    <section id="start-game">
+        <h2>ゲーム開始</h2>
+        <p>準備ができたら、以下のボタンをクリックしてゲームを開始しましょう。</p>
+        <button onclick="startGame()">ゲーム開始</button>
+    </section>
+
+    <script>
+        function startGame() {
+            // ゲームの開始処理をここに追加
+
+            // 例: ゲーム画面に遷移する処理や問題の表示など
+            window.location.href = "quiz_question.html"; // karuta.htmlに遷移
+        }
+    </script>
+    <script type="text/javascript" src="script.js"></script>
+</body>
+</html>

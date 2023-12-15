@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>クイズ結果</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+        }
+
+        header {
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 1em;
+        }
+
+        section {
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        h2 {
+            color: #333;
+        }
+
+        p {
+            font-size: 18px;
+            margin: 10px 0;
+        }
+
+        button {
+            background-color: #4caf50;
+            color: #fff;
+            padding: 10px 20px;
+            font-size: 16px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>郡山観光かるたクイズ</h1>
+    </header>
+
+    <section id="quiz-results">
+        <h2>結果</h2>
+        <p>〇問中</p>
+        <p>〇問正解</p>
+        <!-- ここに他の結果情報を表示する場合は追加 -->
+
+        <button onclick="returnToHome()">ホームに戻る</button>
+    </section>
+
+    <script>
+        // ホームに戻るボタンがクリックされた時の処理
+        function returnToHome() {
+            // top.htmlに遷移
+            window.location.href = "top.html";
+        }
+    </script>
+    <script type="text/javascript" src="script.js"></script>
+</body>
+</html>
